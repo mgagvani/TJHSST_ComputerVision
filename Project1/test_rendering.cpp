@@ -31,20 +31,54 @@ void bresenham(int x1, int y1, int x2, int y2, int mat[][WIDTH]) {
     j = y1;
     e = dy - dx;
 
+    // CASE 0a: same point
+    if(x2 == x1 && y2 == y1) {
+        mat[x1][y1] = 1; 
+        return;
+    }
+    // CASE 0b: same horizontal value but y2 > y1
+    else if(x1 == x2 && y2 > y1) {
+        for(int a = y1; a < y2; a++) {
+            mat[x1][a] = 1;
+        }
+        return;
+    }
+    // CASE 0c: same horizontal value but y1 > y2
+    else if(x1 == x2 && y1 > y2) {
+        for(int a = y2; a < y1; a++) {
+            mat[x1][a] = 1;
+        }
+        return;
+    }
+    // CASE 0d: x1 > x2, vertical values same
+    else if(y1 == y2 && x1 > x2) {
+        for(int a = x2; a < x1; a++) {
+            mat[a][y1] = 1;
+        }
+        return;
+    }
+    // CASE 0e: x2 > x1, vertical values same
+    else if(y1 == y2 && x2 > x1) {
+        for(int a = x1; a < x2; a++) {
+            mat[a][y1] = 1;
+        }
+        return;
+    }
+    
+    // CASE 1: dx > 0, dy > 0, and dx > dy
     for(i = x1; i < x2; i++) {
         mat[i][j] = 1;
         if(e >= 0) {
             j++;
             e -= dx;
         }
-        i++; // Will this work with the FOR LOOP or not
         e += dy;
     }
 }
 
 int main() {
     int (*result)[WIDTH] = new int[HEIGHT][WIDTH] ; // Matrix of integers
-    bresenham(5, 5, 20, 20, result);
+    bresenham(16, 1, 10, 1, result);
     writePPM(HEIGHT, WIDTH, result);
 
     return 0;
