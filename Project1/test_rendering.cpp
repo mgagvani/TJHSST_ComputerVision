@@ -1,44 +1,90 @@
 #include <iostream>
+#include <fstream>
 #include <stdlib.h>
 #include <time.h>
 #include <math.h>
 #include <cassert>
+#include <vector>
 
-#define HEIGHT 480
-#define WIDTH 640 
+#define HEIGHT 800
+#define WIDTH 800 
 
 using namespace std;
 
 double generate_pos() {
-    return (double)rand()/RAND_MAX;
+    double a = (double)rand()/RAND_MAX;
+    while(a < 0.0 || a > 1.0) {
+        a = (double)rand()/RAND_MAX;
+    }
+    assert(abs(a) < 1);
+    return a;
 }
 
 int generate_position(int min, int max) {
     double d = generate_pos();
     int a = min + (int)max*d;
+    while(a >= max || a <= min) {
+        d = generate_pos();
+        a = min + (int)(max*d);
+    }
     return a;
 }
 
-void writePPM(int iheight, int jwidth, int mat[][WIDTH]) {
-    // this is a 2D matrix, thus grayscale and with max value 1
-    // it has to be piped > to something.ppm
+int scale_double(double val, int max) {
+    return (int)(val*max);
+}
 
-    cout << "P3 640 480 1" << endl ; // TODO figure out how to put in HEIGHT and WIDTH in this
+double dist(double x1, double y1, double x2, double y2) {
+    return sqrt((x1-x2)*(x1-x2) + (y1-y2)*(y1-y2));
+}
+
+std::vector<double> get_incenter(double x1, double x2, double x3, double y1, double y2, double y3) {
+    // find a, b, c
+    double a, b, c;
+    a = dist(x1, y1, x2, y2);
+    b = dist(x2, y2, x3, y3);
+    c = dist(x3, y3, x1, y1);
+
+    double sumabc = a + b + c;
+    double t1 = a * x1 + b * x2 + c * x3;
+    double t2 = a * y1 + b * y2 + c * y3;
+
+    double xc = t1/sumabc;
+    double yc = t2/sumabc;
+    // find radius
+    double s = sumabc/2;
+    double r = sqrt((s - a) * (s - b) * (s - c)/s);
+
+    // pack into vector and return
+    std::vector<double> toRet;
+    toRet.push_back(xc); toRet.push_back(yc); toRet.push_back(r);
+    return toRet;
+}
+
+void writePPM(const char* filename, int iheight, int jwidth, int mat[][WIDTH]) {
+    // this is a 2D matrix, thus grayscale and with max value 1
+    // use ofstream 
+    ofstream MyFile;
+    MyFile.open(filename, ios::out);
+
+    MyFile << "P3 800 800 1" << endl ; // TODO figure out how to put in HEIGHT and WIDTH in this
 
     for(int i = 0; i < HEIGHT; i++)
 		for(int j = 0; j < WIDTH; j++)
             if(mat[i][j] == 0)
-                cout << "0 0 0" << endl ; // if 0 is found, then print 0 0 0
+                MyFile << "0 0 0" << endl ; // if 0 is found, then print 0 0 0
             else if (mat[i][j] == 1)
-                cout << "1 1 1" << endl ; // if 1 is found, then print 0 1 0
+                MyFile << "1 1 1" << endl ; // if 1 is found, then print 1 1 1 
             else if (mat[i][j] == 2) 
-                cout << "1 0 0" << endl ;
+                MyFile << "1 0 0" << endl ;
             else if (mat[i][j] == 3) 
-                cout << "0 1 0" << endl ;
+                MyFile << "0 1 0" << endl ;
             else if (mat[i][j] == 4) 
-                cout << "0 0 1" << endl ;
+                MyFile << "0 0 1" << endl ;
             else 
-                cout << "1 0 1" << endl; // error color (for now)
+                MyFile << "1 0 1" << endl ; // error color (for now)
+    
+    MyFile.close();
 }
 
 void set_pixel(int x, int y, int color, int mat[][WIDTH]) {
@@ -53,8 +99,8 @@ void set_pixel(int x, int y, int color, int mat[][WIDTH]) {
      * 4 -> BLUE
     */
 
-    mat[y][x] = color;
-    assert (mat[y][x] == color);
+    mat[x][y] = color;
+    assert (mat[x][y] == color);
 }
 
 void draw_circle(int radius, int i, int j, int mat[][WIDTH]) {
@@ -73,19 +119,22 @@ void draw_circle(int radius, int i, int j, int mat[][WIDTH]) {
         y -= 1;
         ty -= 2;
         }
-        set_pixel(x + j, y  + i, 3, mat); // only add offsets here
-        set_pixel(x + j, -y + i, 3, mat);
-        set_pixel(-x + j, y + i, 3, mat);
-        set_pixel(-x + j, -y+ i, 3, mat);
-        set_pixel(y + j, x  + i, 3, mat);
-        set_pixel(y + j, -x + i, 3, mat);
-        set_pixel(-y + j, x + i, 3, mat);
-        set_pixel(-y + j, -x+ i, 3, mat);
+        set_pixel( y  + i, x + j  , 3, mat); // only add offsets here
+        set_pixel( -y + i, x + j  , 3, mat);
+        set_pixel( y +  i, -x + j , 3, mat);
+        set_pixel( -y+  i, -x + j , 3, mat);
+        set_pixel( x  + i, y + j  , 3, mat);
+        set_pixel( -x + i, y + j  , 3, mat);
+        set_pixel( x +  i, -y + j , 3, mat);
+        set_pixel( -x+  i, -y + j , 3, mat);
         y2_new -= (2 * x) - 3;
     }
 }
 
 void bresenham(int x1, int y1, int x2, int y2, int mat[][WIDTH]) {
+    // swap x and y beforehand
+    
+    
 
     int dx = x2 - x1;
     int dy = y2 - y1;
@@ -125,7 +174,7 @@ void bresenham(int x1, int y1, int x2, int y2, int mat[][WIDTH]) {
         int j = x1;
         int error = dx - dy;
         for (int i = y1; i <= y2; i++) {
-            set_pixel(j, i, 2, mat);
+            set_pixel(i, j, 2, mat);
             if (error > 0 && x2 > x1) {
                 j++;
                 error -= dy;
@@ -140,12 +189,25 @@ void bresenham(int x1, int y1, int x2, int y2, int mat[][WIDTH]) {
     
 }
 
-void draw_triangle(int mat[][WIDTH]) {
-    int x1, x2, x3, y1, y2, y3;
+void bresenham(double x1, double y1, double x2, double y2, int mat[][WIDTH]) {
+    int nx1, ny1, nx2, ny2;
 
-    x1 = generate_position(0,WIDTH);  y1 = generate_position(0, HEIGHT);
-    x2 = generate_position(0,WIDTH);  y2 = generate_position(0, HEIGHT);
-    x3 = generate_position(0,WIDTH);  y3 = generate_position(0, HEIGHT);
+    nx1 = scale_double(x1, WIDTH); nx2 = scale_double(x2, WIDTH);
+    ny2 = scale_double(y2, HEIGHT); ny1 = scale_double(y1, HEIGHT);
+
+    cout << "(" << nx1 << ", " << ny1 << ") (" << nx2 << ", " << ny2 << ")" << endl;
+
+    bresenham(nx1, ny1, nx2, ny2, mat);
+}
+
+std::vector<double> draw_triangle(int mat[][WIDTH]) {
+    double x1, x2, x3, y1, y2, y3;
+
+    x1 = generate_pos();  y1 = generate_pos();
+    x2 = generate_pos();  y2 = generate_pos();
+    x3 = generate_pos();  y3 = generate_pos();
+
+    cout << x1 << x2 << x3 << y1 << y2 << y3 << endl;
 
     // Point 1 to Point 2
     bresenham(x1, y1, x2, y2, mat);
@@ -153,6 +215,26 @@ void draw_triangle(int mat[][WIDTH]) {
     bresenham(x2, y2, x3, y3, mat);
     // Point 3 to Point 1
     bresenham(x3, y3, x1, y1, mat);
+
+    // return for other methods to use
+    std::vector<double> toRet;
+    toRet.push_back(x1); toRet.push_back(x2); toRet.push_back(x3);
+    toRet.push_back(y1); toRet.push_back(y2); toRet.push_back(y3);
+    return toRet;
+}
+
+void draw_incircle(vector<double> triangle, int mat[][WIDTH]) {
+    double x1, x2, x3, y1, y2, y3;
+    x1 = triangle[0]; x2 = triangle[1]; x3 = triangle[2];
+    y1 = triangle[3]; y2 = triangle[4]; y3 = triangle[5];
+    std::vector<double> incircle = get_incenter(x1, x2, x3, y1, y2, y3);
+    
+    int xc = scale_double(incircle.at(0), WIDTH);
+    int yc = scale_double(incircle.at(1), HEIGHT);
+    int _scalefactor = (WIDTH + HEIGHT)/2;
+    int r = scale_double(incircle.at(2), _scalefactor); 
+
+    draw_circle(r, yc, xc, mat);
 }
 
 int main() {
@@ -161,17 +243,16 @@ int main() {
     int (*result)[WIDTH] = new int[HEIGHT][WIDTH] ; // Matrix of integers
     // Tests
     // X1 Y1 X2 Y2
-    // bresenham(1, 1, 1, 1, result);         // CASE 0a
-    // bresenham(50, 90, 100, 90, result);    // CASE 0e
-    // bresenham(100, 300, 50, 300, result);  // CASE 0d
-    // bresenham(120, 100, 120, 400, result); // CASE 0b
-    // bresenham(300, 80, 200, 80, result);   // CASE 0c
-    // bresenham(300, 300, 450, 400, result); // CASE 1
-    // bresenham(50, 50, 1, 1, result);       // CASE 1 
-    // bresenham(10, 100, 50, 10, result);   // CASE 2
-    draw_triangle(result);
-    draw_circle(100, 100, 300, result);
-    writePPM(HEIGHT, WIDTH, result);
+    // bresenham(100, 100, 400, 100, result); // HORIZONTAL
+    // bresenham(100, 100, 100, 400, result); // VERTICAL
+    // bresenham(100, 100, 400, 400, result); // POSITIVE SLOPE
+    // bresenham(400, 100, 100, 400, result); // NEGATIVE SLOPE
+    vector<double> points = draw_triangle(result);
+    cout << "Finished drawing triangle" << endl;
+    draw_incircle(points, result);
+    cout << "Finished drawing incircle" << endl;
+    writePPM("test_rendering.ppm", HEIGHT, WIDTH, result);
+    // cout << "Finished writing to PPM" << endl;
 
     return 0;
 }
