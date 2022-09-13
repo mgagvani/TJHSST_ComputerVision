@@ -114,6 +114,41 @@ std::vector<double> get_circumcenter(double x1, double x2, double x3, double y1,
 
 }
 
+std::vector<double> get_nineptcircle(double x1, double x2, double x3, double y1, double y2, double y3) {
+    // find midpoints
+    double xa = (x1+x2)/2.0; double ya = (y1+y2)/2.0;
+    double xb = (x2+x3)/2.0; double yb = (y2+y3)/2.0;
+    double xc = (x1+x3)/2.0; double yc = (y1+y3)/2.0;
+
+    return get_circumcenter(xa, xb, xc, ya, yb, yc);
+}
+
+std::vector<double> get_centroid(double x1, double x2, double x3, double y1, double y2, double y3) {
+    double x = (x1 + x2 + x3)/3.0;
+    double y = (y1 + y2 + y3)/3.0;
+    std::vector<double> toRet;
+    toRet.push_back(x);
+    toRet.push_back(y);
+    return toRet;
+}
+
+std::vector<double> get_eulerline(vector<double> incenter, vector<double> centroid) {
+    double xi = incenter.at(0); double yi = incenter.at(1);
+    double xc = centroid.at(0); double yc = centroid.at(1);
+
+    double slope = (yc - yi)/(xc - xi);
+
+    // calculate start/end values (given start x is 0 and start y is 1)
+    double ystart, yend;
+    ystart = -1.0 * slope * xi + yi;
+    yend = slope - slope * xi + yi;
+    cout << ystart << " --> " << yend << endl;
+
+    std::vector<double> toRet;
+    toRet.push_back(ystart); toRet.push_back(yend);
+    return toRet;
+}
+
 void writePPM(const char* filename, int iheight, int jwidth, int mat[][WIDTH]) {
     // this is a 2D matrix, thus grayscale and with max value 1
     // use ofstream 
@@ -302,6 +337,7 @@ void draw_circles(vector<double> triangle, int mat[][WIDTH]) {
     } */
 
     draw_circle(r, yc, xc, mat);
+    
 
     // circumcircle
     std::vector<double> circumcircle = get_circumcenter(x1, x2, x3, y1, y2, y3);
@@ -314,6 +350,22 @@ void draw_circles(vector<double> triangle, int mat[][WIDTH]) {
 
     draw_circle(R, ycc, xcc, mat);
 
+    // 9-point circle
+    std::vector<double> nineptcircle = get_nineptcircle(x1, x2, x3, y1, y2, y3);
+    int x9c = scale_double(nineptcircle.at(0), WIDTH);
+    int y9c = scale_double(nineptcircle.at(1), HEIGHT);
+    int rad = R/2;
+
+    draw_circle(rad, y9c, x9c, mat);    
+
+    // Euler line
+    std::vector<double> centroid = get_centroid(x1, x2, x3, y1, y2, y3);
+    std::vector<double> eulerline = get_eulerline(incircle, centroid);
+    int ystart = scale_double(eulerline.at(0), HEIGHT);
+    int yend = scale_double(eulerline.at(1), HEIGHT);
+
+    bresenham(0, ystart, WIDTH, yend, mat);
+
     // debug circumcirlce - draw lines
     //int xa = scale_double(circumcircle.at(2), WIDTH);
     //int ya = scale_double(circumcircle.at(3), HEIGHT);
@@ -323,8 +375,6 @@ void draw_circles(vector<double> triangle, int mat[][WIDTH]) {
     //int ybfar = circumcircle.at(7) * 790 - circumcircle.at(7) * xb + yb;
     //bresenham(xa, ya, 780, yafar, mat);
     //bresenham(xb, yb, 780, ybfar, mat);
-
-
 }
 
 int main() {
@@ -344,7 +394,7 @@ int main() {
     //     draw_circle(r, 400, 400, result);
     // }
     // cout << "Finished drawing incircle" << endl;
-    writePPM("test_rendering.ppm", HEIGHT, WIDTH, result);
+    writePPM("l01.ppm", HEIGHT, WIDTH, result);
     // cout << "Finished writing to PPM" << endl;
 
     return 0;
