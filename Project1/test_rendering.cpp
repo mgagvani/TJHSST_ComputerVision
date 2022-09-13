@@ -46,19 +46,72 @@ std::vector<double> get_incenter(double x1, double x2, double x3, double y1, dou
     c = dist(x3, y3, x1, y1);
 
     double sumabc = a + b + c;
-    double t1 = a * x1 + b * x2 + c * x3;
-    double t2 = a * y1 + b * y2 + c * y3;
+    double t1 = b * x1 + c * x2 + a * x3;
+    double t2 = b * y1 + c * y2 + a * y3;
 
     double xc = t1/sumabc;
     double yc = t2/sumabc;
     // find radius
-    double s = sumabc/2;
-    double r = sqrt((s - a) * (s - b) * (s - c)/s);
+    double s = sumabc / 2.0;
+    double r = sqrt(((s - a) * (s - b) * (s - c))/s);
 
     // pack into vector and return
     std::vector<double> toRet;
     toRet.push_back(xc); toRet.push_back(yc); toRet.push_back(r);
+
+    toRet.push_back(a); toRet.push_back(b); toRet.push_back(c); toRet.push_back(s);
+
+    cout << "(" << xc << ", " << yc << ") r = " << r << endl;
+
     return toRet;
+}
+
+std::vector<double> get_circumcenter(double x1, double x2, double x3, double y1, double y2, double y3) {
+    // find midpoints for two of them
+    double midAx = (x2+x1)/2; double midAy = (y2+y1)/2;
+    double midBx = (x2+x3)/2; double midBy = (y2+y3)/2;
+
+    // find slopes
+    double slopeA = (y2 - y1)/(x2 - x1); slopeA = -1.0/slopeA;
+    double slopeB = (y3 - y2)/(x3 - x2); slopeB = -1.0/slopeB;
+
+    double ya, yb;
+
+    // equation is of form slope * x - slope * midx + midy
+    bool found = false; double thresh = 0.001;
+    double x = 0;
+    for(x = 0; x <= 1.0; x += 1.0/(WIDTH*5)) {
+        ya = slopeA * x - slopeA * midAx + midAy;
+        yb = slopeB * x - slopeB * midBx + midBy;
+        if(abs(ya - yb) < thresh) { 
+            found = true;
+            break;
+        }
+    }
+    while(found == false) {
+        thresh += 0.001;
+        x = 0;
+        for(x = 0; x <= 1.0; x += 1.0/(WIDTH*5)) {
+            ya = slopeA * x - slopeA * midAx + midAy;
+            yb = slopeB * x - slopeB * midBx + midBy;
+            if(abs(ya - yb) < thresh) { 
+                found = true;
+                break;
+            }
+        }
+    }
+
+    double y = (ya + yb)/2.0;
+
+    cout << "x = " << x << ", ya = " << ya << ", yb = " << yb << endl;
+
+    std::vector<double> toRet;
+    toRet.push_back(x); toRet.push_back(y); 
+    toRet.push_back(midAx); toRet.push_back(midAy); 
+    toRet.push_back(midBx); toRet.push_back(midBy);
+    toRet.push_back(slopeA); toRet.push_back(slopeB);
+    return toRet;
+
 }
 
 void writePPM(const char* filename, int iheight, int jwidth, int mat[][WIDTH]) {
@@ -90,6 +143,8 @@ void writePPM(const char* filename, int iheight, int jwidth, int mat[][WIDTH]) {
 void set_pixel(int x, int y, int color, int mat[][WIDTH]) {
     if(x >= WIDTH) return;  // Out of bounds, don't do anything
     if(y >= HEIGHT) return; // Out of bounds, don't do anything
+    if(x < 0) return;
+    if(y < 0) return;
 
     /** COLOR GUIDE
      * 0 -> BLACK
@@ -108,7 +163,12 @@ void draw_circle(int radius, int i, int j, int mat[][WIDTH]) {
     // assignments for method
     int r = radius;
 
-    xmax = (int) (radius * 0.70710678); 
+    // double dtheta = asin(1/(radius*1.414213562))/2.0;
+    // double theta = 45.0 + dtheta;
+
+    // double xmult = sin(theta);
+
+    xmax = (int) (radius * 0.75); 
     y = r; 
     y2 = y * y;
     ty = (2 * y) - 1;
@@ -223,7 +283,7 @@ std::vector<double> draw_triangle(int mat[][WIDTH]) {
     return toRet;
 }
 
-void draw_incircle(vector<double> triangle, int mat[][WIDTH]) {
+void draw_circles(vector<double> triangle, int mat[][WIDTH]) {
     double x1, x2, x3, y1, y2, y3;
     x1 = triangle[0]; x2 = triangle[1]; x3 = triangle[2];
     y1 = triangle[3]; y2 = triangle[4]; y3 = triangle[5];
@@ -234,7 +294,37 @@ void draw_incircle(vector<double> triangle, int mat[][WIDTH]) {
     int _scalefactor = (WIDTH + HEIGHT)/2;
     int r = scale_double(incircle.at(2), _scalefactor); 
 
+    /** debug
+    for(int a = xc-5; a < xc+6; a++) {
+        for(int b = yc-5; b < yc+6; b++) {
+            set_pixel(b, a, 3, mat);
+        }
+    } */
+
     draw_circle(r, yc, xc, mat);
+
+    // circumcircle
+    std::vector<double> circumcircle = get_circumcenter(x1, x2, x3, y1, y2, y3);
+
+    int xcc = scale_double(circumcircle.at(0), WIDTH);
+    int ycc = scale_double(circumcircle.at(1), HEIGHT);
+
+    double _R = (incircle.at(3) * incircle.at(4) * incircle.at(5))/(4.0 * r/800.0 * incircle.at(6));
+    int R = scale_double(_R, _scalefactor);
+
+    draw_circle(R, ycc, xcc, mat);
+
+    // debug circumcirlce - draw lines
+    //int xa = scale_double(circumcircle.at(2), WIDTH);
+    //int ya = scale_double(circumcircle.at(3), HEIGHT);
+    //int xb = scale_double(circumcircle.at(4), WIDTH);
+    //int yb = scale_double(circumcircle.at(5), HEIGHT);
+    //int yafar = circumcircle.at(6) * 790 - circumcircle.at(6) * xa + ya;
+    //int ybfar = circumcircle.at(7) * 790 - circumcircle.at(7) * xb + yb;
+    //bresenham(xa, ya, 780, yafar, mat);
+    //bresenham(xb, yb, 780, ybfar, mat);
+
+
 }
 
 int main() {
@@ -249,8 +339,11 @@ int main() {
     // bresenham(400, 100, 100, 400, result); // NEGATIVE SLOPE
     vector<double> points = draw_triangle(result);
     cout << "Finished drawing triangle" << endl;
-    draw_incircle(points, result);
-    cout << "Finished drawing incircle" << endl;
+    draw_circles(points, result);
+    // for(int r = 2; r < 399; r += 10) {
+    //     draw_circle(r, 400, 400, result);
+    // }
+    // cout << "Finished drawing incircle" << endl;
     writePPM("test_rendering.ppm", HEIGHT, WIDTH, result);
     // cout << "Finished writing to PPM" << endl;
 
