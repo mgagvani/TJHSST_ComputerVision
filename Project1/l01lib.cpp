@@ -132,7 +132,7 @@ std::vector<double> get_centroid(double x1, double x2, double x3, double y1, dou
     return toRet;
 }
 
-std::vector<double> get_eulerline(vector<double> incenter, vector<double> centroid) {
+std::vector<double> get_eulerline(std::vector<double> incenter, std::vector<double> centroid) {
     double xi = incenter.at(0); double yi = incenter.at(1);
     double xc = centroid.at(0); double yc = centroid.at(1);
 
@@ -318,7 +318,7 @@ std::vector<double> draw_triangle(int mat[][WIDTH]) {
     return toRet;
 }
 
-void draw_circles(vector<double> triangle, int mat[][WIDTH]) {
+void draw_circles(std::vector<double> triangle, int mat[][WIDTH]) {
     double x1, x2, x3, y1, y2, y3;
     x1 = triangle[0]; x2 = triangle[1]; x3 = triangle[2];
     y1 = triangle[3]; y2 = triangle[4]; y3 = triangle[5];
@@ -377,6 +377,7 @@ void draw_circles(vector<double> triangle, int mat[][WIDTH]) {
     //bresenham(xb, yb, 780, ybfar, mat);
 }
 
+/** comment out main to use in project 2
 int main() {
     // Set random time
     srand(time(nullptr));
@@ -399,3 +400,4 @@ int main() {
 
     return 0;
 }
+*/
