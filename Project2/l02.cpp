@@ -10,6 +10,7 @@
 #include <algorithm>
 
 #define OUTFILE "l02.ppm"
+#define TEXTOUTFILE "squares.txt"
 
 using namespace std;
 
@@ -116,7 +117,6 @@ class LineSegment {
             if (!between(a.getX(), b.getX(), p.getX())) {
                 return false;
             }
-
             // equation: y = mx + b
             // a[1] = ma[0] + b
             double intercept = a.getY() - slope() * a.getX();
@@ -152,9 +152,6 @@ class LineSegment {
         LineSegment operator*(double s) {
             return LineSegment(a * s, b * s);
         }
-        // Line getLine() const {
-        //     return Line::fromPoints(a, b);
-        // }
         Point getA() const { return a; }
         Point getB() const { return b; }
 
@@ -220,11 +217,11 @@ class Line {
 
             return Point(detX / det, detY / det);
         }
-        Line through(const Point& p) const {
+        Line through(Point p) {
             double targetC = (p.getX() * a) + (p.getY() * b);
             return Line(a, b, targetC);
         }
-        Line getPerpendicular() const {
+        Line getPerpendicular() {
             return Line(-b, a, c);
         }
         static Line fromPoints(Point a, Point b) {
@@ -305,9 +302,7 @@ class Polygon {
         }
         static Polygon generateConvex(int nsides) {
             while (true) {
-                // std::cout << "Generating...\n";
                 Polygon tmp (getRandomPolygonCounterclockwise(nsides));
-
                 if (tmp.isConvex()) {
                     return tmp;
                 }
@@ -362,22 +357,9 @@ class Polygon {
                 newPoint = newPoint.scaled_point(newPoint,0.5) + Point(0.5, 0.5);
 
                 points.push_back(newPoint);
-
-                // std::cout << "Generating point; m=" << magnitude;
-                // std::cout << "; theta=" << (angle * 180 / 3.14159265) << "\n";
             }
 
             return Polygon(points);
-        }
-        int length() {
-            return points.size();
-        }
-        double perimeter() {
-            double acc = 0;
-            for (auto it : sides) { // google "auto class c++ looping"
-                acc += it.length();
-            }
-            return acc;
         }
 
         // RENDERING METHODS
@@ -441,8 +423,42 @@ Polygon four_point_square(int mat[][WIDTH], int i, Polygon poly) {
 
     Polygon square = Polygon(squarePoints);
 
+    // DEBUG
+    Line::draw(sideDE, mat, 99);
+    Line::draw(sideA, mat, 99);
+    Line::draw(sideB, mat, 99);
+    Line::draw(sideC, mat, 99);
+
     return square;
+}
+
+void write_square_info(std::vector<Polygon> squares, const char* filename) {
+    // preprocess, find areas
+    std::vector<double> areas;
+    for(Polygon p: squares) {
+        areas.push_back(p.getSide(0).length()*p.getSide(0).length());
+    }
+    double minArea = 2.00; /// the max actually is 1x1 which is 1
+    for(double area: areas) {
+        if(area < minArea) {
+            minArea = area;
+        }
+    }
     
+    // output file
+    ofstream MyFile;
+    MyFile.open(filename, ios::out);
+    int i = 0;
+    for(Polygon p: squares) {
+        for(Point point: p.getPoints()) {
+            MyFile << "(" << point.x << ", " << point.y << ")" << endl;
+        }
+        MyFile << "Area :" << areas[i] << endl;
+        MyFile << endl;
+        i++;
+    }
+    MyFile.close();
+
 }
 
 
@@ -467,14 +483,17 @@ int main() {
     // Polygon poly = Polygon::generateConvex(4);
     // Polygon::draw(poly, mat);
     Polygon poly = Polygon::generateConvex(4);
-    vector<string> outfiles = {"Images/out1.ppm", "Images/out2.ppm", "Images/out3.ppm", "Images/out4.ppm", "Images/out5.ppm", "Images/out6.ppm"};
+    std::vector<Polygon> squares;
+    std::vector<string> outfiles = {"Images/out1.ppm", "Images/out2.ppm", "Images/out3.ppm", "Images/out4.ppm", "Images/out5.ppm", "Images/out6.ppm"};
     for(int i = 0; i < 6; i++) {
         int(*matrix)[WIDTH] = new int[HEIGHT][WIDTH]; // matrix
-        Polygon::draw(four_point_square(matrix, i, poly), matrix, 4);
+        Polygon _s = four_point_square(matrix, i, poly);
+        squares.push_back(_s);
+        Polygon::draw(_s, matrix, 4);
         Polygon::draw(poly, matrix, 3);
         writePPM(outfiles[i].c_str(), HEIGHT, WIDTH, matrix);
     }
-
+    write_square_info(squares, TEXTOUTFILE);
     int(*mat)[WIDTH] = new int[HEIGHT][WIDTH]; // matrix
     perp_diagonal(mat);
     writePPM(OUTFILE, HEIGHT, WIDTH, mat);
