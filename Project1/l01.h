@@ -31,11 +31,13 @@ void writePPM(const char* filename, int iheight, int jwidth, int mat[][WIDTH]);
 
 void set_pixel(int x, int y, int color, int mat[][WIDTH]);
 
-void draw_circle(int radius, int i, int j, int mat[][WIDTH]);
+void draw_circle(int radius, int i, int j, int mat[][WIDTH], int color);
 
-void bresenham(int x1, int y1, int x2, int y2, int mat[][WIDTH]);
+void draw_point(double y, double x, int size, int mat[][WIDTH], int color);
 
-void bresenham(double x1, double y1, double x2, double y2, int mat[][WIDTH]);
+void bresenham(int x1, int y1, int x2, int y2, int mat[][WIDTH], int color);
+
+void bresenham(double x1, double y1, double x2, double y2, int mat[][WIDTH], int color);
 
 std::vector<double> draw_triangle(int mat[][WIDTH]);
 

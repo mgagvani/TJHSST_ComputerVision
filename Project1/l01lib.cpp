@@ -193,7 +193,7 @@ void set_pixel(int x, int y, int color, int mat[][WIDTH]) {
     assert (mat[x][y] == color);
 }
 
-void draw_circle(int radius, int i, int j, int mat[][WIDTH]) {
+void draw_circle(int radius, int i, int j, int mat[][WIDTH], int color) {
     int x, y, xmax, y2, y2_new, ty;
     // assignments for method
     int r = radius;
@@ -214,19 +214,28 @@ void draw_circle(int radius, int i, int j, int mat[][WIDTH]) {
         y -= 1;
         ty -= 2;
         }
-        set_pixel( y  + i, x + j  , 3, mat); // only add offsets here
-        set_pixel( -y + i, x + j  , 3, mat);
-        set_pixel( y +  i, -x + j , 3, mat);
-        set_pixel( -y+  i, -x + j , 3, mat);
-        set_pixel( x  + i, y + j  , 3, mat);
-        set_pixel( -x + i, y + j  , 3, mat);
-        set_pixel( x +  i, -y + j , 3, mat);
-        set_pixel( -x+  i, -y + j , 3, mat);
+        set_pixel( y  + i, x + j  , color, mat); // only add offsets here
+        set_pixel( -y + i, x + j  , color, mat);
+        set_pixel( y +  i, -x + j , color, mat);
+        set_pixel( -y+  i, -x + j , color, mat);
+        set_pixel( x  + i, y + j  , color, mat);
+        set_pixel( -x + i, y + j  , color, mat);
+        set_pixel( x +  i, -y + j , color, mat);
+        set_pixel( -x+  i, -y + j , color, mat);
         y2_new -= (2 * x) - 3;
     }
 }
 
-void bresenham(int x1, int y1, int x2, int y2, int mat[][WIDTH]) {
+void draw_point(double y, double x, int size, int mat[][WIDTH], int color) {
+    int drawy = scale_double(y, HEIGHT);
+    int drawx = scale_double(x, WIDTH);
+
+    for(int i = 1; i < size; i++) {
+        draw_circle(i, drawy, drawx, mat, color);
+    }
+}
+
+void bresenham(int x1, int y1, int x2, int y2, int mat[][WIDTH], int color) {
     // swap x and y beforehand
     
     
@@ -246,7 +255,7 @@ void bresenham(int x1, int y1, int x2, int y2, int mat[][WIDTH]) {
         int j = y1;
         int error = dy - dx;
         for (int i = x1; i <= x2; i++) {
-            set_pixel(j, i, 2, mat);
+            set_pixel(j, i, color, mat);
             // Error is greater than 0, so we know the line has moved up one pixel
             if (error > 0 && y2 > y1) {
                 j++;
@@ -269,7 +278,7 @@ void bresenham(int x1, int y1, int x2, int y2, int mat[][WIDTH]) {
         int j = x1;
         int error = dx - dy;
         for (int i = y1; i <= y2; i++) {
-            set_pixel(i, j, 2, mat);
+            set_pixel(i, j, color, mat);
             if (error > 0 && x2 > x1) {
                 j++;
                 error -= dy;
@@ -284,15 +293,15 @@ void bresenham(int x1, int y1, int x2, int y2, int mat[][WIDTH]) {
     
 }
 
-void bresenham(double x1, double y1, double x2, double y2, int mat[][WIDTH]) {
+void bresenham(double x1, double y1, double x2, double y2, int mat[][WIDTH], int color) {
     int nx1, ny1, nx2, ny2;
 
     nx1 = scale_double(x1, WIDTH); nx2 = scale_double(x2, WIDTH);
     ny2 = scale_double(y2, HEIGHT); ny1 = scale_double(y1, HEIGHT);
 
-    cout << "(" << nx1 << ", " << ny1 << ") (" << nx2 << ", " << ny2 << ")" << endl;
+    // cout << "(" << nx1 << ", " << ny1 << ") (" << nx2 << ", " << ny2 << ")" << endl;
 
-    bresenham(nx1, ny1, nx2, ny2, mat);
+    bresenham(nx1, ny1, nx2, ny2, mat, color);
 }
 
 std::vector<double> draw_triangle(int mat[][WIDTH]) {
@@ -305,11 +314,11 @@ std::vector<double> draw_triangle(int mat[][WIDTH]) {
     cout << x1 << x2 << x3 << y1 << y2 << y3 << endl;
 
     // Point 1 to Point 2
-    bresenham(x1, y1, x2, y2, mat);
+    bresenham(x1, y1, x2, y2, mat, 2);
     // Point 2 to Point 3
-    bresenham(x2, y2, x3, y3, mat);
+    bresenham(x2, y2, x3, y3, mat, 2);
     // Point 3 to Point 1
-    bresenham(x3, y3, x1, y1, mat);
+    bresenham(x3, y3, x1, y1, mat, 2);
 
     // return for other methods to use
     std::vector<double> toRet;
@@ -336,7 +345,7 @@ void draw_circles(std::vector<double> triangle, int mat[][WIDTH]) {
         }
     } */
 
-    draw_circle(r, yc, xc, mat);
+    draw_circle(r, yc, xc, mat, 1);
     
 
     // circumcircle
@@ -348,7 +357,7 @@ void draw_circles(std::vector<double> triangle, int mat[][WIDTH]) {
     double _R = (incircle.at(3) * incircle.at(4) * incircle.at(5))/(4.0 * r/800.0 * incircle.at(6));
     int R = scale_double(_R, _scalefactor);
 
-    draw_circle(R, ycc, xcc, mat);
+    draw_circle(R, ycc, xcc, mat, 1);
 
     // 9-point circle
     std::vector<double> nineptcircle = get_nineptcircle(x1, x2, x3, y1, y2, y3);
@@ -356,7 +365,7 @@ void draw_circles(std::vector<double> triangle, int mat[][WIDTH]) {
     int y9c = scale_double(nineptcircle.at(1), HEIGHT);
     int rad = R/2;
 
-    draw_circle(rad, y9c, x9c, mat);    
+    draw_circle(rad, y9c, x9c, mat, 1);    
 
     // Euler line
     std::vector<double> centroid = get_centroid(x1, x2, x3, y1, y2, y3);
@@ -364,7 +373,7 @@ void draw_circles(std::vector<double> triangle, int mat[][WIDTH]) {
     int ystart = scale_double(eulerline.at(0), HEIGHT);
     int yend = scale_double(eulerline.at(1), HEIGHT);
 
-    bresenham(0, ystart, WIDTH, yend, mat);
+    bresenham(0, ystart, WIDTH, yend, mat, 2);
 
     // debug circumcirlce - draw lines
     //int xa = scale_double(circumcircle.at(2), WIDTH);
