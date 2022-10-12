@@ -1,0 +1,667 @@
+    1  ls
+    2  cd utils
+    3  ls
+    4  ./testutils
+    5  ls
+    6  cd ..
+    7  cd utils
+    8  ./testutils
+    9  cd ..
+   10  cd test
+   11  ls
+   12  g++ test.cpp -o test.out
+   13  ./test.out
+   14  g++ test.cpp -o test.out
+   15  ./test.out
+   16  ./test
+   17  g++ test.cpp -o test.out
+   18  ./test
+   19  ./test.out
+   20  g++ test.cpp -o test.out
+   21  ./test.out
+   22  g++ test.cpp -o test.out
+   23  ./test.out
+   24  g++ test.cpp -o test.out
+   25  ./test.out
+   26  g++ test.cpp -o test.out
+   27  ./test.out
+   28  g++ test.cpp -o test.out
+   29  ./test.out
+   30  g++ test.cpp -o test.out
+   31  ./test.out
+   32  g++ test.cpp -o test.out
+   33  ./test.out
+   34  ls
+   35  cd test
+   36  ls
+   37  g++ demo.cpp demo.out
+   38  g++ demo.cpp -o demo.out
+   39  ls
+   40  rm test.out
+   41  ls
+   42  g++ makePPM.cpp
+   43  ./a.out > foo.ppm
+   44  head foo.ppm 
+   45  wc -l foo.ppm
+   46  convert foo.ppm foo.jpg
+   47  sudo apt install imagemagick-6.q16
+   48  convert foo.ppm foo.jpg
+   49  convert -compress none foo.jpg fooo.ppm
+   50  head fooo.ppm
+   51  head - n 3 fooo.ppm
+   52  ls -al
+   53  g++ makePPM.cpp
+   54  cd test
+   55  ls
+   56  ls
+   57  dir
+   58  ls
+   59  g++ -v
+   60  sudo apt install g++
+   61  g++ -v
+   62  sudo apt install gcc
+   63  sudo apt-get install build-essential gdb
+   64  vim /etc/resolv.conf 
+   65  sudo vim /etc/resolv.conf 
+   66  sudo apt-get install build-essential gdb
+   67  sudo apt-get update
+   68  sudo hwclock -s
+   69  sudo apt-get install build-essential gdb
+   70  whereis g++
+   71  whereis gdb
+   72  g++ -v
+   73  code
+   74  cd /mnt
+   75  ls
+   76  cd c
+   77  ls
+   78  cd Users
+   79  cd mgagv
+   80  ls
+   81  cd OneDrive/
+   82  ls
+   83  cd Docu
+   84  cd Doq
+   85  cd Documents/
+   86  ls
+   87  cd ComputerVision/
+   88  ls
+   89  code .
+   90  sudo code .
+   91  code .
+   92  ls
+   93  cd utils
+   94  ls
+   95  g++ makePPM.cpp
+   96  ls
+   97  cd ..
+   98  cd test
+   99  g++ makePPM.cpp
+  100  ls
+  101  ./a.out > foo.ppm
+  102  convert foo.ppm foo.jpg
+  103  g++ makePPM.cpp
+  104  ./a.out > foo.ppm
+  105  convert foo.ppm foo.jpg
+  106  g++ makePPM.cpp
+  107  ./a.out > foo.ppm
+  108  convert foo.ppm foo.jpg
+  109  g++ makePPM.cpp
+  110  ./a.out > foo.ppm
+  111  convert foo.ppm foo.jpg
+  112  g++ makePPM.cpp
+  113  ./a.out > foo.ppm
+  114  convert foo.ppm foo.jpg
+  115  g++ makePPM.cpp
+  116  ./a.out > foo.ppm
+  117  convert foo.ppm foo.jpg
+  118  cd Project1/
+  119  ls
+  120  ./test_rendering > test_rendering.ppm
+  121  convert test_rendering.ppm test_rendering.jpg
+  122  g++ -o test_rendering test_rendering.cpp -Wall -Wpedantic -Wextra -O2
+  123  g++ -o test_rendering test_rendering.cpp -Wall -Wpedantic -Wextra -OFast
+  124  g++ -o test_rendering test_rendering.cpp -Wall -Wpedantic -Wextra -Ofast
+  125  ./test_rendering 
+  126  g++ -o test_rendering test_rendering.cpp -Wall -Wpedantic -Wextra -Ofast
+  127  ./test_rendering 
+  128  g++ -o test_rendering test_rendering.cpp -Wall -Wpedantic -Wextra -Ofast
+  129  ./test_rendering 
+  130  g++ -o test_rendering test_rendering.cpp -Wall -Wpedantic -Wextra -Ofast
+  131  ./test_rendering 
+  132  convert test_rendering.ppm test_rendering.jpg
+  133  g++ -o test_rendering test_rendering.cpp -Wall -Wpedantic -Wextra -Ofast
+  134  ./test_rendering 
+  135  convert test_rendering.ppm test_rendering.jpg
+  136  g++ -o test_rendering test_rendering.cpp -Wall -Wpedantic -Wextra -Ofast
+  137  ./test_rendering 
+  138  g++ -o test_rendering test_rendering.cpp -Wall -Wpedantic -Wextra -Ofast
+  139  ./test_rendering 
+  140  g++ -o test_rendering test_rendering.cpp -Wall -Wpedantic -Wextra -Ofast
+  141  ./test_rendering 
+  142  convert test_rendering.ppm test_rendering.jpg
+  143  g++ -o test_rendering test_rendering.cpp -Wall -Wpedantic -Wextra -Ofast
+  144  ./test_rendering 
+  145  convert test_rendering.ppm test_rendering.jpg
+  146  g++ -o test_rendering test_rendering.cpp -Wall -Wpedantic -Wextra -Ofast
+  147  ./test_rendering 
+  148  convert test_rendering.ppm test_rendering.jpg
+  149  g++ -o test_rendering test_rendering.cpp -Wall -Wpedantic -Wextra -Ofast
+  150  ./test_rendering 
+  151  convert test_rendering.ppm test_rendering.jpg
+  152  g++ -o test_rendering test_rendering.cpp -Wall -Wpedantic -Wextra -Ofast
+  153  ./test_rendering 
+  154  convert test_rendering.ppm test_rendering.jpg
+  155  g++ -o test_rendering test_rendering.cpp -Wall -Wpedantic -Wextra -Ofast
+  156  ./test_rendering 
+  157  convert test_rendering.ppm test_rendering.jpg
+  158  g++ -o test_rendering test_rendering.cpp -Wall -Wpedantic -Wextra -Ofast
+  159  ./test_rendering 
+  160  convert test_rendering.ppm test_rendering.jpg
+  161  g++ -o test_rendering test_rendering.cpp -Wall -Wpedantic -Wextra -Ofast
+  162  ./test_rendering 
+  163  convert test_rendering.ppm test_rendering.jpg
+  164  g++ -o test_rendering test_rendering.cpp -Wall -Wpedantic -Wextra -Ofast
+  165  ./test_rendering 
+  166  convert test_rendering.ppm test_rendering.jpg
+  167  g++ -o test_rendering test_rendering.cpp -Wall -Wpedantic -Wextra -Ofast
+  168  ./test_rendering 
+  169  convert test_rendering.ppm test_rendering.jpg
+  170  g++ -o test_rendering test_rendering.cpp -Wall -Wpedantic -Wextra -Ofast
+  171  ./test_rendering 
+  172  convert test_rendering.ppm test_rendering.jpg
+  173  g++ -o test_rendering test_rendering.cpp -Wall -Wpedantic -Wextra -Ofast
+  174  ./test_rendering 
+  175  convert test_rendering.ppm test_rendering.jpg
+  176  g++ -o test_rendering test_rendering.cpp -Wall -Wpedantic -Wextra -Ofast
+  177  ./test_rendering 
+  178  convert test_rendering.ppm test_rendering.jpg
+  179  ./test_rendering 
+  180  convert test_rendering.ppm test_rendering.jpg
+  181  g++ -o test_rendering test_rendering.cpp -Wall -Wpedantic -Wextra -Ofast
+  182  ./test_rendering 
+  183  convert test_rendering.ppm test_rendering.jpg
+  184  ./test_rendering 
+  185  convert test_rendering.ppm test_rendering.jpg
+  186  ./test_rendering 
+  187  convert test_rendering.ppm test_rendering.jpg
+  188  ./test_rendering 
+  189  convert test_rendering.ppm test_rendering.jpg
+  190  ./test_rendering 
+  191  convert test_rendering.ppm test_rendering.jpg
+  192  ./test_rendering 
+  193  convert test_rendering.ppm test_rendering.jpg
+  194  ./test_rendering 
+  195  convert test_rendering.ppm test_rendering.jpg
+  196  ./test_rendering 
+  197  convert test_rendering.ppm test_rendering.jpg
+  198  ./test_rendering 
+  199  convert test_rendering.ppm test_rendering.jpg
+  200  ./test_rendering 
+  201  convert test_rendering.ppm test_rendering.jpg
+  202  ./test_rendering 
+  203  convert test_rendering.ppm test_rendering.jpg
+  204  g++ -o test_rendering test_rendering.cpp -Wall -Wpedantic -Wextra -Ofast
+  205  ./test_rendering 
+  206  convert test_rendering.ppm test_rendering.jpg
+  207  ./test_rendering 
+  208  convert test_rendering.ppm test_rendering.jpg
+  209  g++ -o test_rendering test_rendering.cpp -Wall -Wpedantic -Wextra -Ofast
+  210  convert test_rendering.ppm test_rendering.jpg
+  211  ./test_rendering 
+  212  convert test_rendering.ppm test_rendering.jpg
+  213  ./test_rendering 
+  214  convert test_rendering.ppm test_rendering.jpg
+  215  g++ -o test_rendering test_rendering.cpp -Wall -Wpedantic -Wextra -Ofast
+  216  ./test_rendering 
+  217  convert test_rendering.ppm test_rendering.jpg
+  218  g++ -o test_rendering test_rendering.cpp -Wall -Wpedantic -Wextra -Ofast
+  219  ./test_rendering 
+  220  convert test_rendering.ppm test_rendering.jpg
+  221  g++ -o test_rendering test_rendering.cpp -Wall -Wpedantic -Wextra -Ofast
+  222  ./test_rendering 
+  223  convert test_rendering.ppm test_rendering.jpg
+  224  g++ -o test_rendering test_rendering.cpp -Wall -Wpedantic -Wextra -Ofast
+  225  ./test_rendering 
+  226  convert test_rendering.ppm test_rendering.jpg
+  227  g++ -o test_rendering test_rendering.cpp -Wall -Wpedantic -Wextra -Ofast
+  228  ./test_rendering 
+  229  convert test_rendering.ppm test_rendering.jpg
+  230  ./test_rendering 
+  231  convert test_rendering.ppm test_rendering.jpg
+  232  ./test_rendering 
+  233  convert test_rendering.ppm test_rendering.jpg
+  234  g++ -o test_rendering test_rendering.cpp -Wall -Wpedantic -Wextra -Ofast
+  235  ./test_rendering 
+  236  convert test_rendering.ppm test_rendering.jpg
+  237  ./test_rendering 
+  238  convert test_rendering.ppm test_rendering.jpg
+  239  ./test_rendering 
+  240  convert test_rendering.ppm test_rendering.jpg
+  241  g++ -o test_rendering test_rendering.cpp -Wall -Wpedantic -Wextra -Ofast
+  242  ./test_rendering 
+  243  convert test_rendering.ppm test_rendering.jpg
+  244  g++ -o test_rendering test_rendering.cpp -Wall -Wpedantic -Wextra -Ofast
+  245  ./test_rendering 
+  246  convert test_rendering.ppm test_rendering.jpg
+  247  ./test_rendering 
+  248  convert test_rendering.ppm test_rendering.jpg
+  249  ./test_rendering 
+  250  convert test_rendering.ppm test_rendering.jpg
+  251  ./test_rendering 
+  252  convert test_rendering.ppm test_rendering.jpg
+  253  ./test_rendering 
+  254  convert test_rendering.ppm test_rendering.jpg
+  255  g++ -o test_rendering test_rendering.cpp -Wall -Wpedantic -Wextra -Ofast
+  256  ./test_rendering 
+  257  convert test_rendering.ppm test_rendering.jpg
+  258  ./test_rendering 
+  259  convert test_rendering.ppm test_rendering.jpg
+  260  ./test_rendering 
+  261  convert test_rendering.ppm test_rendering.jpg
+  262  ./test_rendering 
+  263  convert test_rendering.ppm test_rendering.jpg
+  264  ./test_rendering 
+  265  convert test_rendering.ppm test_rendering.jpg
+  266  ./test_rendering 
+  267  convert test_rendering.ppm test_rendering.jpg
+  268  ./test_rendering 
+  269  convert test_rendering.ppm test_rendering.jpg
+  270  g++ -o test_rendering test_rendering.cpp -Wall -Wpedantic -Wextra -Ofast
+  271  ./test_rendering 
+  272  convert test_rendering.ppm test_rendering.jpg
+  273  g++ -o test_rendering test_rendering.cpp -Wall -Wpedantic -Wextra -Ofast
+  274  ./test_rendering 
+  275  convert test_rendering.ppm test_rendering.jpg
+  276  g++ -o test_rendering test_rendering.cpp -Wall -Wpedantic -Wextra -Ofast
+  277  ./test_rendering 
+  278  convert test_rendering.ppm test_rendering.jpg
+  279  g++ -o test_rendering test_rendering.cpp -Wall -Wpedantic -Wextra -Ofast
+  280  ./test_rendering 
+  281  convert test_rendering.ppm test_rendering.jpg
+  282  g++ -o test_rendering test_rendering.cpp -Wall -Wpedantic -Wextra -Ofast
+  283  ./test_rendering 
+  284  convert test_rendering.ppm test_rendering.jpg
+  285  g++ -o test_rendering test_rendering.cpp -Wall -Wpedantic -Wextra -Ofast
+  286  ./test_rendering 
+  287  convert test_rendering.ppm test_rendering.jpg
+  288  g++ -o test_rendering test_rendering.cpp -Wall -Wpedantic -Wextra -Ofast
+  289  ./test_rendering 
+  290  convert test_rendering.ppm test_rendering.jpg
+  291  g++ -o test_rendering test_rendering.cpp -Wall -Wpedantic -Wextra -Ofast
+  292  ./test_rendering 
+  293  convert test_rendering.ppm test_rendering.jpg
+  294  g++ -o test_rendering test_rendering.cpp -Wall -Wpedantic -Wextra -Ofast
+  295  ./test_rendering 
+  296  convert test_rendering.ppm test_rendering.jpg
+  297  g++ -o test_rendering test_rendering.cpp -Wall -Wpedantic -Wextra -Ofast
+  298  ./test_rendering 
+  299  convert test_rendering.ppm test_rendering.jpg
+  300  g++ -o test_rendering test_rendering.cpp -Wall -Wpedantic -Wextra -Ofast
+  301  ./test_rendering 
+  302  convert test_rendering.ppm test_rendering.jpg
+  303  g++ -o test_rendering test_rendering.cpp -Wall -Wpedantic -Wextra -Ofast
+  304  ./test_rendering 
+  305  convert test_rendering.ppm test_rendering.jpg
+  306  ./test_rendering 
+  307  convert test_rendering.ppm test_rendering.jpg
+  308  ./test_rendering 
+  309  convert test_rendering.ppm test_rendering.jpg
+  310  ./test_rendering 
+  311  convert test_rendering.ppm test_rendering.jpg
+  312  ./test_rendering 
+  313  convert test_rendering.ppm test_rendering.jpg
+  314  ./test_rendering 
+  315  convert test_rendering.ppm test_rendering.jpg
+  316  g++ -o test_rendering test_rendering.cpp -Wall -Wpedantic -Wextra -Ofast
+  317  ./test_rendering 
+  318  g++ -o test_rendering test_rendering.cpp -Wall -Wpedantic -Wextra -Ofast
+  319  ./test_rendering 
+  320  convert test_rendering.ppm test_rendering.jpg
+  321  g++ -o test_rendering test_rendering.cpp -Wall -Wpedantic -Wextra -Ofast
+  322  ./test_rendering 
+  323  convert test_rendering.ppm test_rendering.jpg
+  324  ./test_rendering 
+  325  ./test_rendering 
+  326  g++ -o test_rendering test_rendering.cpp -Wall -Wpedantic -Wextra -Ofast
+  327  ./test_rendering 
+  328  g++ -o test_rendering test_rendering.cpp -Wall -Wpedantic -Wextra -Ofast
+  329  ./test_rendering 
+  330  convert test_rendering.ppm test_rendering.jpg
+  331  ./test_rendering 
+  332  convert test_rendering.ppm test_rendering.jpg
+  333  g++ -o test_rendering test_rendering.cpp -Wall -Wpedantic -Wextra -Ofast
+  334  ./test_rendering 
+  335  convert test_rendering.ppm test_rendering.jpg
+  336  ./test_rendering 
+  337  convert test_rendering.ppm test_rendering.jpg
+  338  ./test_rendering 
+  339  convert test_rendering.ppm test_rendering.jpg
+  340  ./test_rendering 
+  341  convert test_rendering.ppm test_rendering.jpg
+  342  ./test_rendering 
+  343  convert test_rendering.ppm test_rendering.jpg
+  344  ./test_rendering 
+  345  convert test_rendering.ppm test_rendering.jpg
+  346  ./test_rendering 
+  347  convert test_rendering.ppm test_rendering.jpg
+  348  ./test_rendering 
+  349  convert test_rendering.ppm test_rendering.jpg
+  350  g++ -o test_rendering test_rendering.cpp -Wall -Wpedantic -Wextra -Ofast
+  351  ./test_rendering 
+  352  convert test_rendering.ppm test_rendering.jpg
+  353  g++ -o test_rendering test_rendering.cpp -Wall -Wpedantic -Wextra -Ofast
+  354  ./test_rendering 
+  355  convert test_rendering.ppm test_rendering.jpg
+  356  ./test_rendering 
+  357  convert test_rendering.ppm test_rendering.jpg
+  358  ./test_rendering 
+  359  g++ -o test_rendering test_rendering.cpp -Wall -Wpedantic -Wextra -Ofast
+  360  ./test_rendering 
+  361  convert test_rendering.ppm test_rendering.jpg
+  362  ./test_rendering 
+  363  convert test_rendering.ppm test_rendering.jpg
+  364  g++ -o test_rendering test_rendering.cpp -Wall -Wpedantic -Wextra -Ofast
+  365  ./test_rendering 
+  366  convert test_rendering.ppm test_rendering.jpg
+  367  ./test_rendering 
+  368  convert test_rendering.ppm test_rendering.jpg
+  369  ./test_rendering 
+  370  convert test_rendering.ppm test_rendering.jpg
+  371  ./test_rendering 
+  372  cd Project1/
+  373  ./test_rendering 
+  374  convert test_rendering.ppm test_rendering.jpg
+  375  ./test_rendering 
+  376  convert test_rendering.ppm test_rendering.jpg
+  377  ./test_rendering 
+  378  convert test_rendering.ppm test_rendering.jpg
+  379  ./test_rendering 
+  380  convert test_rendering.ppm test_rendering.jpg
+  381  ./test_rendering 
+  382  convert test_rendering.ppm test_rendering.jpg
+  383  ./test_rendering 
+  384  convert test_rendering.ppm test_rendering.jpg
+  385  ./test_rendering 
+  386  convert test_rendering.ppm test_rendering.jpg
+  387  ./test_rendering 
+  388  convert test_rendering.ppm test_rendering.jpg
+  389  ./test_rendering 
+  390  convert test_rendering.ppm test_rendering.jpg
+  391  ./test_rendering 
+  392  convert test_rendering.ppm test_rendering.jpg
+  393  ./test_rendering 
+  394  convert test_rendering.ppm test_rendering.jpg
+  395  g++ -o test_rendering test_rendering.cpp -Wall -Wpedantic -Wextra -Ofast
+  396  ./test_rendering 
+  397  convert test_rendering.ppm test_rendering.jpg
+  398  ./test_rendering 
+  399  convert test_rendering.ppm test_rendering.jpg
+  400  g++ -o test_rendering test_rendering.cpp -Wall -Wpedantic -Wextra -Ofast
+  401  ./test_rendering 
+  402  convert test_rendering.ppm test_rendering.jpg
+  403  ./test_rendering 
+  404  convert test_rendering.ppm test_rendering.jpg
+  405  g++ -o test_rendering test_rendering.cpp -Wall -Wpedantic -Wextra -Ofast
+  406  ./test_rendering 
+  407  convert test_rendering.ppm test_rendering.jpg
+  408  ./test_rendering 
+  409  g++ -o test_rendering test_rendering.cpp -Wall -Wpedantic -Wextra -Ofast
+  410  ./test_rendering 
+  411  convert test_rendering.ppm test_rendering.jpg
+  412  ./test_rendering 
+  413  convert test_rendering.ppm test_rendering.jpg
+  414  ./test_rendering 
+  415  convert test_rendering.ppm test_rendering.jpg
+  416  g++ -o test_rendering test_rendering.cpp -Wall -Wpedantic -Wextra -Ofast
+  417  ./test_rendering 
+  418  convert test_rendering.ppm test_rendering.jpg
+  419  ./test_rendering 
+  420  convert test_rendering.ppm test_rendering.jpg
+  421  ./test_rendering 
+  422  convert test_rendering.ppm test_rendering.jpg
+  423  ./test_rendering 
+  424  convert test_rendering.ppm test_rendering.jpg
+  425  ./test_rendering 
+  426  convert test_rendering.ppm test_rendering.jpg
+  427  ./test_rendering 
+  428  convert test_rendering.ppm test_rendering.jpg
+  429  ./test_rendering 
+  430  convert test_rendering.ppm test_rendering.jpg
+  431  ./test_rendering 
+  432  convert test_rendering.ppm test_rendering.jpg
+  433  ./test_rendering 
+  434  convert test_rendering.ppm test_rendering.jpg
+  435  ./test_rendering 
+  436  convert test_rendering.ppm test_rendering.jpg
+  437  g++ -o test_rendering test_rendering.cpp -Wall -Wpedantic -Wextra -Ofast
+  438  ./test_rendering 
+  439  convert test_rendering.ppm test_rendering.jpg
+  440  ./test_rendering 
+  441  convert test_rendering.ppm test_rendering.jpg
+  442  ./test_rendering 
+  443  convert test_rendering.ppm test_rendering.jpg
+  444  g++ -o test_rendering test_rendering.cpp -Wall -Wpedantic -Wextra -Ofast
+  445  ./test_rendering 
+  446  convert test_rendering.ppm test_rendering.jpg
+  447  ./test_rendering 
+  448  convert test_rendering.ppm test_rendering.jpg
+  449  ./test_rendering 
+  450  convert test_rendering.ppm test_rendering.jpg
+  451  ./test_rendering 
+  452  convert test_rendering.ppm test_rendering.jpg
+  453  ./test_rendering 
+  454  convert test_rendering.ppm test_rendering.jpg
+  455  cd Project2
+  456  g++ -o l02 l02.cpp -Wall -Wpedantic -Wextra -Ofast
+  457  clear
+  458  g++ -o l02 l02.cpp -Wall -Wpedantic -Wextra -Ofast
+  459  g++ -o l02 l01.cpp l02.cpp -Wall -Wpedantic -Wextra -Ofast
+  460  g++ -o l02 ../Project1/l01.cpp l02.cpp -Wall -Wpedantic -Wextra -Ofast
+  461  g++ -o l02 ../Project1/l0lib1.cpp l02.cpp -Wall -Wpedantic -Wextra -Ofast
+  462  g++ -o l02 ../Project1/l1lib1.cpp l02.cpp -Wall -Wpedantic -Wextra -Ofast
+  463  g++ -o l02 ../Project1/l01lib.cpp l02.cpp -Wall -Wpedantic -Wextra -Ofast
+  464  ./l02
+  465  g++ -o l02 ../Project1/l01lib.cpp l02.cpp -Wall -Wpedantic -Wextra -Ofast
+  466  cd Project
+  467  cd Project2
+  468  g++ -o l02 ../Project1/l01lib.cpp l02.cpp -Wall -Wpedantic -Wextra -Ofast
+  469  ./l02
+  470  g++ -o l02 ../Project1/l01lib.cpp l02.cpp -Wall -Wpedantic -Wextra -Ofast
+  471  ./l02
+  472  g++ -o l02 ../Project1/l01lib.cpp l02.cpp -Wall -Wpedantic -Wextra -Ofast
+  473  ./l02
+  474  convert l02.ppm l02.jpg
+  475  g++ -o l02 ../Project1/l01lib.cpp l02.cpp -Wall -Wpedantic -Wextra -Ofast
+  476  cd Project2
+  477  g++ -o l02 ../Project1/l01lib.cpp l02.cpp -Wall -Wpedantic -Wextra -Ofast
+  478  ./l02
+  479  convert l02.ppm l02.jpg
+  480  g++ -o l02 ../Project1/l01lib.cpp l02.cpp -Wall -Wpedantic -Wextra -Ofast
+  481  ./l02
+  482  convert l02.ppm l02.jpg
+  483  g++ -o l02 ../Project1/l01lib.cpp l02.cpp -Wall -Wpedantic -Wextra -Ofast
+  484  ./l02
+  485  g++ -o l02 ../Project1/l01lib.cpp l02.cpp -Wall -Wpedantic -Wextra -Ofast
+  486  convert l02.ppm l02.jpg
+  487  g++ -o l02 ../Project1/l01lib.cpp l02.cpp -Wall -Wpedantic -Wextra -Ofast
+  488  ./l02
+  489  convert l02.ppm l02.jpg
+  490  g++ -o l02 ../Project1/l01lib.cpp l02.cpp -Wall -Wpedantic -Wextra -Ofast
+  491  ./l02
+  492  convert l02.ppm l02.jpg
+  493  g++ -o l02 ../Project1/l01lib.cpp l02.cpp -Wall -Wpedantic -Wextra -Ofast
+  494  ./l02
+  495  convert l02.ppm l02.jpg
+  496  g++ -o l02 ../Project1/l01lib.cpp l02.cpp -Wall -Wpedantic -Wextra -Ofast
+  497  ./l02
+  498  convert l02.ppm l02.jpg
+  499  ./l02
+  500  convert l02.ppm l02.jpg
+  501  cd Project2
+  502  ls
+  503  g++ -o l02 ../Project1/l01lib.cpp l02.cpp -Wall -Wpedantic -Wextra -Ofast
+  504  ls
+  505  cd Project2
+  506  ls
+  507  g++ -o l02 ../Project1/l01lib.cpp l02.cpp -Wall -Wpedantic -Wextra -Ofast
+  508  ./l02
+  509  g++ -o l02 ../Project1/l01lib.cpp l02.cpp -Wall -Wpedantic -Wextra -Ofast
+  510  ./l02
+  511  g++ -o l02 ../Project1/l01lib.cpp l02.cpp -Wall -Wpedantic -Wextra -Ofast
+  512  ./l02
+  513  ls
+  514  cd Project2
+  515  ls
+  516  g++ -o l02 ../Project1/l01lib.cpp l02.cpp -Wall -Wpedantic -Wextra -Ofast
+  517  ./l02
+  518  g++ -o l02 ../Project1/l01lib.cpp l02.cpp -Wall -Wpedantic -Wextra -Ofast
+  519  ./l02
+  520  g++ -o l02 ../Project1/l01lib.cpp l02.cpp -Wall -Wpedantic -Wextra -Ofast
+  521  ./l02
+  522  g++ -o l02 ../Project1/l01lib.cpp l02.cpp -Wall -Wpedantic -Wextra -Ofast
+  523  ./l02
+  524  g++ -o l02 ../Project1/l01lib.cpp l02.cpp -Wall -Wpedantic -Wextra -Ofast
+  525  ./l02
+  526  g++ -o l02 ../Project1/l01lib.cpp l02.cpp -Wall -Wpedantic -Wextra -Ofast
+  527  ./l02
+  528  g++ -o l02 ../Project1/l01lib.cpp l02.cpp -Wall -Wpedantic -Wextra -Ofast
+  529  ./l02
+  530  ls
+  531  cd Project2
+  532  ls
+  533  make
+  534  ./run.sh 
+  535  make
+  536  ./run.sh 
+  537  make
+  538  ./run.sh 
+  539  cd Project2
+  540  l
+  541  ls
+  542  l
+  543  ls
+  544  lss
+  545  ls -wal
+  546  ls -wa
+  547  ls -al
+  548  ./run.sh 
+  549  ls
+  550  cd Pr
+  551  cd Project2
+  552  l
+  553  ls
+  554  ./run.sh 
+  555  cd Project1
+  556  cd ..
+  557  cd Project1
+  558  cd ..
+  559  cd Project2
+  560  ls
+  561  ./run.sh 
+  562  g++ -o l02 ../Project1/l01lib.cpp l02.cpp -Wall -Wpedantic -Wextra -Ofast
+  563  ./run.sh 
+  564  cd Project1
+  565  cd ..
+  566  cd Project2
+  567  ./run.sh 
+  568  make
+  569  ./run.sh 
+  570  cd Unit2
+  571  ls
+  572  cd Project2
+  573  ls
+  574  ./run.sh 
+  575  ls
+  576  g++ -o l02 ../Project1/l01lib.cpp l02lib.cpp l02.cpp -Wall -Wpedantic -Wextra -Ofast
+  577  cd Project1
+  578  cd .
+  579  cd ..
+  580  cd Project2
+  581  g++ -o l02 ../Project1/l01lib.cpp l02lib.cpp l02.cpp -Wall -Wpedantic -Wextra -Ofast
+  582  [A
+  583  g++ -o l02 ../Project1/l01lib.cpp l02lib.cpp l02.cpp -Wall -Wpedantic -Wextra -Ofast
+  584  ./run.sh 
+  585  g++ -o cvlib.a ../Project1/l01lib.cpp l02lib.cpp -Wall -Wpedantic -Wextra -Ofast 
+  586  g++ -c  ../Project1/l01lib.cpp l02lib.cpp -Wall -Wpedantic -Wextra -Ofast 
+  587  mkdir lib
+  588  mv l01lib.o lib
+  589  ls
+  590  mv l02lib.o lib
+  591  cd .
+  592  ls
+  593  cd ..
+  594  ls
+  595  mkdir lib
+  596  mkdir include
+  597  ln -s Project1/*.h .
+  598  ls
+  599  rm l01.h 
+  600  cd include/
+  601  ls
+  602  ln -s Project1/*.h .
+  603  ln -s Project2/*.h .
+  604  ls
+  605  rm \*.h 
+  606  ls
+  607  ln -s ../Project?/*.h .
+  608  ls
+  609  cd ../lib/
+  610  ls
+  611  ar rcs cvlib.a ../Project2/lib/l01lib.o ../Project2/lib/l02lib.o 
+  612  ls
+  613  cd ../Project2
+  614  ls
+  615  g++ -I../include -L../lib l02.cpp -lcvlib 
+  616  g++ -I../include -L../lib -lcvlib l02.cpp  
+  617  g++ -I../include -L../lib  l02.cpp  -lcvlib
+  618  ./a.out 
+  619  convert l02.ppm l02.jpg
+  620  cd Images/
+  621  for file in `ls *.ppm` ; do  echo $file ; ofile = echo $file | sed 's/.ppm/.jpg/g'; echo $ofile; done
+  622  for file in `ls *.ppm` ; do  echo $file ; ofile=`echo $file | sed 's/.ppm/.jpg/g'`; echo $ofile; done
+  623  for file in `ls *.ppm` ; do  echo $file ; ofile=`echo $file | sed 's/.ppm/.jpg/g'`; echo $ofile; convert $file $ofile; done
+  624  history
+  625  g++ -o l02 -I../include -L../lib  l02.cpp  -lcvlib
+  626  cd ..
+  627  g++ -o l02 -I../include -L../lib  l02.cpp  -lcvlib
+  628  make clean
+  629  make all
+  630  make clean
+  631  make buildrun
+  632  make -s clean
+  633  make -s buildrun
+  634  make clean
+  635  make buildrun
+  636  make run
+  637  cd ..
+  638  cd sample/
+  639  cp ../Project2/Makefile .
+  640  ls
+  641  make buildrun
+  642  cd ..
+  643  cd lib
+  644  cd ..
+  645  cd libsrc
+  646  ls
+  647  ln -s ../Project1/l01lib.cpp ../Project2/l02lib.cpp .
+  648  ls
+  649  vim Makefile
+  650  history
+  651  make clean
+  652  make all
+  653  make install
+  654  cd ..
+  655  cd sample/
+  656  make clean
+  657  make all
+  658  make run
+  659  history
+  660  history >> cmdline.txt
+  661  ls
+  662  l
+  663  cd ..
+  664  ls
+  665  cd sample/
+  666  ls
+  667  history >> cmdline.txt
