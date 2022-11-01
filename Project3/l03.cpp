@@ -2,6 +2,7 @@
 #include <l02lib.h>
 
 #include <algorithm>
+#include <iomanip>
 
 class PointPair
 { // stores two points and the distance between them
@@ -183,12 +184,40 @@ std::vector<Point> recursive_closest_points(std::vector<Point> points) {
     return recursive_closest_pointpair(points).to_vector();
 }
 
+void savePoints(std::vector<Point> points, const char* filename) {
+	std::ofstream out(filename);
+	
+    out << std::fixed << std::setprecision(20); // this increases the precision to 20 decimal places
+	for (auto it = points.begin(); it != points.end(); it++) {
+		out << it->getX() << "  " << it->getY() << "\n";
+	}
+
+	out.close();
+}
+
+std::vector<Point> readPoints(const char* filename) {
+	std::ifstream in(filename);
+	std::vector<Point> points;
+	double x, y;
+	while (in >> x) {
+		in >> y;
+		points.push_back(Point(x, y));
+	}
+	return points;
+}
+
+
 int main()
 {
     srand(time(nullptr));
     int(*matrix)[WIDTH] = new int[HEIGHT][WIDTH];
 
-    std::vector<Point> points = generate_random_points(50000);
+    std::vector<Point> points = generate_random_points(250000);
+
+    // save to file
+    // savePoints(points, "point250k.txt");
+    std::vector<Point> points = readPoints("point50k.txt");
+
     // for (Point p : points)
     // {
     //     p.draw(matrix, 99);
