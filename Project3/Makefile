@@ -4,7 +4,7 @@ clean:
 	rm l03 
 
 l03:
-	g++ -o l03 -I../include -L../lib  l03.cpp  -lcvlib -Wall -Wpedantic -Wextra -Ofast
+	g++ -o l03 -I../include -L../lib  l03.cpp  -lcvlib -Wall -Wpedantic -Wextra -Ofast -std=c++11
 
 all:
 	make l03
