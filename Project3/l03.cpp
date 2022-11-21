@@ -268,17 +268,17 @@ int main()
     srand(time(nullptr));
     int(*matrix)[WIDTH] = new int[HEIGHT][WIDTH];
 
-    // std::vector<Point> points = generate_random_points(400000);
+    // std::vector<Point> points = generate_random_points(1000000);
 
     // save to file
-    // savePoints(points, "point400k.txt");
-    std::vector<Point> points = readPoints("point100k.txt");
+    // savePoints(points, "point1m.txt");
+    std::vector<Point> points = readPoints("point750k.txt");
 
     // for (Point p : points)
     // {
     //     p.draw(matrix, 99);
     // }
-    std::vector<Point> closest_points = grid_closest_points(points);
+    std::vector<Point> closest_points = recursive_closest_points(points);
     LineSegment seg = LineSegment(closest_points[0], closest_points[1]);
     seg.draw(matrix, 3);
     seg.getA().draw(matrix, 1);
