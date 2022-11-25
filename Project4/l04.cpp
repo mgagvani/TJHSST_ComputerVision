@@ -6,8 +6,8 @@
 
 using namespace std;
 
-#define RGB_H 3024
-#define RGB_W 4032
+#define RGB_H 1512
+#define RGB_W 2016
 #define RGB_D 3
 #define MAX_COLOR 255
 
