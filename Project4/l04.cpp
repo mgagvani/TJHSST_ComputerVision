@@ -273,17 +273,57 @@ class RGBImage { // size_t is cool
                         // out.img[i][j][2] = 255;
                     }
                     else if(getGrayscale(i, j) > high) { // strong edge pixel
-                        // out.setGrayscale(i, j, 255);
+                        out.setGrayscale(i, j, 255);
                         // out.img[i][j][1] = 255;
                     }     
                     else { // weak edge pixel
                         // out.img[i][j][0] = 255;
-                        out.setGrayscale(i, j, 0);
+                        out.setGrayscale(i, j, 127);
                     }          
                 }
             }
             return out;
         }
+
+        void thinEdges(RGBImage &img) {
+            // loop until image has not changed
+            bool changed = true;
+            while (changed) {
+                changed = false;
+                // loop over the pixels in the image
+                for (size_t y = 1; y < RGB_H - 1; y++) {
+                    for (size_t x = 1; x < RGB_W - 1; x++) {
+                        int G = img.getGrayscale(y, x);
+                        if (G != 255) {
+                            // pixel is not a strong edge pixel, skip it
+                            continue;
+                        }
+                        else { // weak edge pixel, or nothing
+                            // check if pixel is aligned with its neighbors
+                            bool aligned = false;
+                            int topG = img.getGrayscale(y - 1, x);
+                            int bottomG = img.getGrayscale(y + 1, x);
+                            int leftG = img.getGrayscale(y, x - 1);
+                            int rightG = img.getGrayscale(y, x + 1);
+                            if (topG == 255 || bottomG == 255) {
+                                // pixel is aligned with its vertical neighbors
+                                aligned = true;
+                            } 
+                            else if (leftG == 255 || rightG == 255) {
+                                // pixel is aligned with its horizontal neighbors
+                                aligned = true;
+                            }
+                            if (aligned) {
+                                // pixel is a weak edge pixel and aligned with its neighbors, remove it
+                                img.setGrayscale(y, x, 0);
+                                changed = true;
+                            }
+                        } 
+                    }
+                }
+            }
+        }
+
 
         void combineImgs(const RGBImage &img1, const RGBImage &img2) {
             for(int i = 0; i < RGB_H; i++) {
@@ -336,7 +376,8 @@ int main() {
     asdf.binaryThresh(100);
     asdf.binaryThresh(250);
     // static RGBImage foo = RGBImage(); foo.combineImgs(img2, asdf);
-    static RGBImage canny = img.canny(sobelx, sobely, _img6, 105, 120);
+    static RGBImage canny = img.canny(sobelx, sobely, _img6, 50, 120);
+    canny.thinEdges(canny);
     canny.write("l04.ppm");
     cout << "performed convolution" << endl;
     
