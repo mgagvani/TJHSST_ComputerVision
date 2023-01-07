@@ -4,7 +4,7 @@ clean:
 	rm l04 
 
 l04:
-	g++ -o l04 -I../include -L../lib  l04.cpp  -lcvlib -Wall -Wpedantic -Wextra -Ofast
+	g++ -o l04 -g -I../include -L../lib  l04.cpp  -lcvlib -Wall -Wpedantic -Wextra -Ofast
 
 all:
 	make clean

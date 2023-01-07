@@ -4,7 +4,7 @@ clean:
 	rm l05 
 
 l05:
-	g++ -o l05 -I../include -L../lib  l04.cpp  -lcvlib -Wall -Wpedantic -Wextra -Ofast
+	g++ -o l05 -I../include -L../lib  l05.cpp  -lcvlib -Wall -Wpedantic -Wextra -Ofast
 
 all:
 	make clean
@@ -14,7 +14,7 @@ run:
 	echo "--- Running Code ---"
 	./l05
 	echo "--- Converting to JPG ---"
-	convert l05*.ppm l05*.jpg
+	convert l05.ppm l05.jpg
 
 buildrun:
 	make all
